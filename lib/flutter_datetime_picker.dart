@@ -348,7 +348,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           CupertinoButton(
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.only(left: 10),
             child: Text(
               '$cancel',
               style: theme.cancelStyle,
@@ -363,7 +363,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             ),
           ),
           CupertinoButton(
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.only(right: 10),
             child: Text(
               '$done',
               style: theme.doneStyle,
