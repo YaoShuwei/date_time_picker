@@ -357,12 +357,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
           ),
           Expanded(
             child: Text(
-              "请选择",
+              theme.title,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xFF45AA8C),
-                fontSize: 14.0,
-              ),
+              style: theme.titleStyle,
             ),
           ),
           CupertinoButton(
