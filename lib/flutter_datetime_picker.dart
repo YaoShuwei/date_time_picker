@@ -27,6 +27,7 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime currentTime,
     DatePickerTheme theme,
+        bool showDay:true,
   }) {
     Navigator.push(
         context,
@@ -37,7 +38,7 @@ class DatePicker {
             locale: locale,
             theme: theme,
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-            pickerModel: DatePickerModel(currentTime: currentTime, maxTime: maxTime, minTime: minTime, locale: locale)));
+            pickerModel: DatePickerModel(currentTime: currentTime, maxTime: maxTime, minTime: minTime, locale: locale,showDay:showDay)));
   }
 
   ///
@@ -46,6 +47,7 @@ class DatePicker {
   static void showTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
+    bool showSecond :false,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
     locale: LocaleType.en,
@@ -61,7 +63,7 @@ class DatePicker {
             locale: locale,
             theme: theme,
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-            pickerModel: TimePickerModel(currentTime: currentTime, locale: locale)));
+            pickerModel: TimePickerModel(currentTime: currentTime, locale: locale,showSecond:showSecond)));
   }
 
   ///
@@ -319,10 +321,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
               _notifyDateChanged();
             });
           }),
+          if(widget.pickerModel.showRightColumn)
           Text(
             widget.pickerModel.rightDivider(),
             style: theme.itemStyle,
           ),
+          if(widget.pickerModel.showRightColumn)
           _renderColumnView(ValueKey(widget.pickerModel.currentMiddleIndex() + widget.pickerModel.currentLeftIndex()), theme, widget.pickerModel.rightStringAtIndex, rightScrollCtrl,
               widget.pickerModel.layoutProportions()[2], (index) {
             widget.pickerModel.setRightIndex(index);

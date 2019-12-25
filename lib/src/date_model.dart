@@ -30,6 +30,8 @@ abstract class BasePickerModel {
   String rightDivider();
   //layout proportions for 3 columns
   List<int> layoutProportions();
+
+  bool showRightColumn;
 }
 
 //a base class for picker data model
@@ -122,7 +124,7 @@ class DatePickerModel extends CommonPickerModel {
       {DateTime currentTime,
       DateTime maxTime,
       DateTime minTime,
-      LocaleType locale})
+      LocaleType locale,showDay})
       : super(locale: locale) {
     this.maxTime = maxTime ?? DateTime(2049, 12, 31);
     this.minTime = minTime ?? DateTime(1970, 1, 1);
@@ -136,7 +138,6 @@ class DatePickerModel extends CommonPickerModel {
       }
     }
     this.currentTime = currentTime;
-
     _fillLeftLists();
     _fillMiddleLists();
     _fillRightLists();
@@ -145,6 +146,7 @@ class DatePickerModel extends CommonPickerModel {
     _currentLeftIndex = this.currentTime.year - this.minTime.year;
     _currentMiddleIndex = this.currentTime.month - minMonth;
     _currentRightIndex = this.currentTime.day - minDay;
+    showRightColumn = showDay;
   }
 
   void _fillLeftLists() {
@@ -328,13 +330,14 @@ class DatePickerModel extends CommonPickerModel {
 
 //a time picker model
 class TimePickerModel extends CommonPickerModel {
-  TimePickerModel({DateTime currentTime, LocaleType locale})
+  TimePickerModel({DateTime currentTime, LocaleType locale,bool showSecond})
       : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
 
     _currentLeftIndex = this.currentTime.hour;
     _currentMiddleIndex = this.currentTime.minute;
     _currentRightIndex = this.currentTime.second;
+    showRightColumn = showSecond;
   }
 
   @override
