@@ -392,6 +392,7 @@ class DateTimePickerModel extends CommonPickerModel {
     _currentLeftIndex = 0;
     _currentMiddleIndex = this.currentTime.hour;
     _currentRightIndex = this.currentTime.minute;
+    showRightColumn=true;
   }
 
   @override
